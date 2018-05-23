@@ -1,14 +1,13 @@
 package entidades;
 
+//import beans.LoginBean;
 import java.util.Date;
 import java.util.Objects;
 
 public class Carro {
     
-    private Integer id;
-    private String modelo;
-    private String fabricante;
-    private String cor;
+    private Integer IdDono, id;
+    private String modelo, fabricante, nomeDono, cor;
     private Date ano;
 
     public Integer getId() {
@@ -72,5 +71,23 @@ public class Carro {
         }
         return true;
     }
+
+    public Integer getIdDono() {
+        return IdDono;
+    }
+
+    public void setIdDono(Integer IdDono) {
+        this.IdDono = IdDono;
+    }
+
+    public String getNomeDono() {
+        return nomeDono;
+    }
+
+    public void setNomeDono(String nomeDono) {
+        this.nomeDono = nomeDono;
+    }
+
+   
 
 }
