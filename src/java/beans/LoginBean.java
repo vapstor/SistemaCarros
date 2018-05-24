@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
 /**
@@ -18,7 +13,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import conexao.SessionUtils;
 import entidades.Usuario;
-
 import entidades.dao.LoginDAO;
 import exception.ErroSistema;
 
@@ -59,23 +53,26 @@ public class LoginBean implements Serializable {
 
     //validate login
     public String validateUsernamePassword() throws ErroSistema {
-        LoginDAO ldao = new LoginDAO();
-        boolean valid = ldao.autenticar(user, pwd);
-        if (valid) {
-            Usuario usuarioLogado = ldao.getUsuarioLogado(user);
-            this.setId(usuarioLogado.getId());
-            HttpSession session = SessionUtils.getSession();
-            session.setAttribute("username", user);
-            session.setAttribute("usuario", usuarioLogado);
-            return "admin";
-        } else {
+        if (user.equals("") || pwd.equals("")) {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "Usuário Incorreto!",
                             "Verifique as informações"));
-            return "index";
+            logout();
+        } else {
+            LoginDAO ldao = new LoginDAO();
+            boolean valid = ldao.autenticar(user, pwd);
+            if (valid) {
+                Usuario usuarioLogado = ldao.getUsuarioLogado(user);
+                this.setId(usuarioLogado.getId());
+                HttpSession session = SessionUtils.getSession();
+                session.setAttribute("username", user);
+                session.setAttribute("usuario", usuarioLogado);
+                return "admin";
+            }
         }
+        return "";
     }
 
     //logout event, invalidate session

@@ -15,7 +15,6 @@ public abstract class CrudBean<E, D extends CrudDAO> {
     public String estadoTela = "buscar"; //Inserir, Editar, Buscar, Trocar
     
     public E entidade;
-    public E entidadeParaTroca;
     public List<E> entidades;
     public List<E> entidadesTroca;
     
@@ -34,9 +33,8 @@ public abstract class CrudBean<E, D extends CrudDAO> {
             mudarParaBusca();
         } catch (ErroSistema ex) {
             Logger.getLogger(CrudBean.class.getName()).log(Level.SEVERE, null, ex);
-            adicionarMensagem(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
+            adicionarMensagem("Erro ao salvar o Carro!", FacesMessage.SEVERITY_ERROR);
         }
-        mudarParaBusca();
     }
     
     public void editar(E entidade){
@@ -71,7 +69,7 @@ public abstract class CrudBean<E, D extends CrudDAO> {
     }
     
     public void adicionarMensagem(String mensagem, FacesMessage.Severity tipoErro){
-        FacesMessage fm = new FacesMessage(tipoErro, mensagem, null);
+        FacesMessage fm = new FacesMessage(tipoErro, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, fm);
     }
     
@@ -103,7 +101,6 @@ public abstract class CrudBean<E, D extends CrudDAO> {
     //Responsvel por criar os métodos nas classes bean
     public abstract D getDao();
     public abstract E criarNovaEntidade();
-    public abstract E criarNovaEntidadeTroca();
     
     //Metodos para controle da tela
     public boolean isInseri(){
@@ -116,12 +113,12 @@ public abstract class CrudBean<E, D extends CrudDAO> {
         return "buscar".equals(estadoTela);
     }
     
-    private boolean isHome() {
-        return "home".equals(estadoTela);
+     public boolean isTroca(){
+        return "trocar".equals(estadoTela);
     }
-
-    private void mudarParaHome() {
-        estadoTela = "home";
+    
+    public void mudarParaTroca(){
+        estadoTela = "trocar";
     }
     
     public void mudarParaInseri(){
@@ -135,14 +132,5 @@ public abstract class CrudBean<E, D extends CrudDAO> {
     public void mudarParaBusca(){
         estadoTela = "buscar";
     }
-
-    public E getEntidadeParaTroca() {
-        return entidadeParaTroca;
-    }
-
-    public void setEntidadeParaTroca(E entidadeParaTroca) {
-        this.entidadeParaTroca = entidadeParaTroca;
-    }
-
     
 }

@@ -9,8 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
-public abstract class UsuarioDAO implements CrudDAO<Usuario>{
+public abstract class UsuarioDAO implements CrudDAO<Usuario> {
 
     private Usuario user;
 
@@ -19,7 +21,7 @@ public abstract class UsuarioDAO implements CrudDAO<Usuario>{
         try {
             Connection conexao = FabricaConexao.getConexao();
             PreparedStatement ps;
-            if(entidade.getId() == null){
+            if (entidade.getId() == null) {
                 ps = conexao.prepareStatement("INSERT INTO Usuarios (nome, login, senha) VALUES (?, ?,?)");
             } else {
                 ps = conexao.prepareStatement("UPDATE Usuarios set nome=?, login=?, senha=? where id=?");
@@ -31,15 +33,21 @@ public abstract class UsuarioDAO implements CrudDAO<Usuario>{
             ps.execute();
             FabricaConexao.fecharConexao();
         } catch (SQLException ex) {
+            adicionarMensagem("Erro ao tentar salvar usuario!", FacesMessage.SEVERITY_INFO);
             throw new ErroSistema("Erro ao tentar salvar usuario!", ex);
         }
+    }
+
+    public void adicionarMensagem(String mensagem, FacesMessage.Severity tipoErro) {
+        FacesMessage fm = new FacesMessage(tipoErro, mensagem, null);
+        FacesContext.getCurrentInstance().addMessage(null, fm);
     }
 
     @Override
     public void deletar(Usuario entidade) throws ErroSistema {
         try {
             Connection conexao = FabricaConexao.getConexao();
-            PreparedStatement ps  = conexao.prepareStatement("DELETE from Usuarios where id = ?");
+            PreparedStatement ps = conexao.prepareStatement("DELETE from Usuarios where id = ?");
             ps.setInt(1, entidade.getId());
             ps.execute();
         } catch (SQLException ex) {
@@ -54,7 +62,7 @@ public abstract class UsuarioDAO implements CrudDAO<Usuario>{
             PreparedStatement ps = conexao.prepareStatement("select * from Usuarios");
             ResultSet resultSet = ps.executeQuery();
             List<Usuario> usuarios = new ArrayList<>();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setId(resultSet.getInt("id"));
                 usuario.setNome(resultSet.getString("Nome"));
@@ -64,9 +72,9 @@ public abstract class UsuarioDAO implements CrudDAO<Usuario>{
             }
             FabricaConexao.fecharConexao();
             return usuarios;
-            
+
         } catch (SQLException ex) {
-            throw new ErroSistema("Erro ao buscar os usuarios!",ex);
+            throw new ErroSistema("Erro ao buscar os usuarios!", ex);
         }
     }
 }

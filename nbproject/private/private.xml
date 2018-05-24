@@ -9,17 +9,17 @@
         </group>
         <group>
             <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/beans/CarroBean.java</file>
-            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/web/gerenciar-carro.xhtml</file>
-            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/entidades/dao/UsuarioDAO.java</file>
-            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/beans/TrocaBean.java</file>
-            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/entidades/dao/CarroDAO.java</file>
-            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/entidades/Carro.java</file>
-            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/beans/CrudBean.java</file>
-            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/beans/UsuarioBean.java</file>
             <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/web/template.xhtml</file>
-            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/exception/ErroSistema.java</file>
             <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/entidades/dao/CrudDAO.java</file>
+            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/entidades/dao/UsuarioDAO.java</file>
+            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/exception/ErroSistema.java</file>
             <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/web/resources/sccomp/toolbarCrud.xhtml</file>
+            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/beans/UsuarioBean.java</file>
+            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/build.xml</file>
+            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/entidades/Carro.java</file>
+            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/entidades/dao/CarroDAO.java</file>
+            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/src/java/beans/CrudBean.java</file>
+            <file>file:/home/vapstor/NetBeansProjects/SistemasCarros/web/gerenciar-carro.xhtml</file>
         </group>
     </open-files>
 </project-private>

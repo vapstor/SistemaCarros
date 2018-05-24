@@ -31,13 +31,4 @@ public class UsuarioBean extends CrudBean<Usuario, UsuarioDAO> implements Serial
     public Usuario criarNovaEntidade() {
         return new Usuario();
     }
-    
-//    public Usuario usuarioLogado() {
-//        LoginBean = new LoginBean();
-//    }
-
-    @Override
-    public Usuario criarNovaEntidadeTroca() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
