@@ -10,7 +10,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -22,6 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 public class CarroDAO implements CrudDAO<Carro> {
 
+    DateFormat df = new SimpleDateFormat("yyy-MM-dd");
     UsuarioDAO userDAO;
 
     @Override
@@ -68,6 +72,36 @@ public class CarroDAO implements CrudDAO<Carro> {
     public List<Carro> buscar() throws ErroSistema {
         HttpSession session = SessionUtils.getSession();
         Usuario currentUser = (Usuario) session.getAttribute("usuario");
+
+        //Aqui busca para a search
+        if (currentUser.getId() == 0) {
+            try {
+                Connection conexao = FabricaConexao.getConexao();
+                PreparedStatement ps = conexao.prepareStatement("SELECT * FROM Carros");
+                ResultSet resultSet = ps.executeQuery();
+                List<Carro> carros = new ArrayList<>();
+                while (resultSet.next()) {
+                    Carro carro = new Carro();
+                    carro.setIdDono(resultSet.getInt("IdDono"));
+                    carro.setId(resultSet.getInt("id"));
+                    carro.setModelo(resultSet.getString("modelo"));
+                    carro.setFabricante(resultSet.getString("fabricante"));
+                    carro.setCor(resultSet.getString("cor"));
+                    carro.setAno(resultSet.getDate("ano"));
+                    carro.setApenasAno(formataSomenteAno(df.format(carro.getAno())));
+                    carro.setNomeDono(resultSet.getString("NomeDono"));
+                    carros.add(carro);
+                }
+                FabricaConexao.fecharConexao();
+                return carros;
+
+            } catch (SQLException ex) {
+                adicionarMensagem("Erro ao buscar os carros!", FacesMessage.SEVERITY_INFO);
+                throw new ErroSistema("Erro ao buscar os carros!", ex);
+            }
+        }
+
+        //aqui busca para troca
         try {
             Connection conexao = FabricaConexao.getConexao();
             PreparedStatement ps = conexao.prepareStatement("SELECT * FROM Carros WHERE IdDono = ?");
@@ -82,6 +116,7 @@ public class CarroDAO implements CrudDAO<Carro> {
                 carro.setFabricante(resultSet.getString("fabricante"));
                 carro.setCor(resultSet.getString("cor"));
                 carro.setAno(resultSet.getDate("ano"));
+                carro.setApenasAno(formataSomenteAno(df.format(carro.getAno())));
                 carro.setNomeDono(resultSet.getString("NomeDono"));
                 carros.add(carro);
             }
@@ -112,6 +147,7 @@ public class CarroDAO implements CrudDAO<Carro> {
                 carro.setFabricante(resultSet.getString("fabricante"));
                 carro.setCor(resultSet.getString("cor"));
                 carro.setAno(resultSet.getDate("ano"));
+                carro.setApenasAno(formataSomenteAno(df.format(carro.getAno())));
                 carro.setNomeDono(resultSet.getString("NomeDono"));
                 allCarros.add(carro);
             }
@@ -121,6 +157,17 @@ public class CarroDAO implements CrudDAO<Carro> {
             adicionarMensagem("Erro ao buscar os carros!", FacesMessage.SEVERITY_INFO);
             throw new ErroSistema("Erro ao buscar os carros!", ex);
         }
+    }
+
+    public String formataSomenteAno(String data) {
+        char[] dataChar = data.toCharArray();
+        char[] dataFormatada = new char[4];
+        String somenteAno;
+        for (int i = 0; i < 4; i++) {
+            dataFormatada[i] = dataChar[i];
+        }
+        somenteAno = String.valueOf(dataFormatada);
+        return somenteAno;
     }
 
     public void adicionarMensagem(String mensagem, FacesMessage.Severity tipoErro) {
@@ -153,13 +200,4 @@ public class CarroDAO implements CrudDAO<Carro> {
         }
     }
 
-//    @Override
-//    public List<Carro> inicio() throws ErroSistema {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public void home() throws ErroSistema {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
 }

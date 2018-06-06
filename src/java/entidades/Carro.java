@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Carro {
     
     private Integer IdDono, id;
-    private String modelo, fabricante, nomeDono, cor;
+    private String modelo, fabricante, nomeDono, cor, apenasAno;
     private Date ano;
 
     public Integer getId() {
@@ -86,6 +86,18 @@ public class Carro {
 
     public void setNomeDono(String nomeDono) {
         this.nomeDono = nomeDono;
+    }
+
+    public Object toLowerCase() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getApenasAno() {
+        return apenasAno;
+    }
+
+    public void setApenasAno(String apenasAno) {
+        this.apenasAno = apenasAno;
     }
 
    

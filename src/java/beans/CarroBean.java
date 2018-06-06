@@ -20,6 +20,8 @@ public class CarroBean extends CrudBean<Carro, CarroDAO> implements Serializable
 
     private CarroDAO carroDAO;
     private Usuario currentUser;
+    private Carro carroSelecionado, carroParaTroca;
+    private List<Carro> listaCarrosTroca;
 
     public CarroBean() {
         buscar();
@@ -40,8 +42,6 @@ public class CarroBean extends CrudBean<Carro, CarroDAO> implements Serializable
     public void setListaCarrosTroca(List<Carro> listaCarrosTroca) {
         this.listaCarrosTroca = listaCarrosTroca;
     }
-    private Carro carroSelecionado, carroParaTroca;
-    private List<Carro> listaCarrosTroca;
 
     @Override
     public CarroDAO getDao() {
@@ -53,7 +53,6 @@ public class CarroBean extends CrudBean<Carro, CarroDAO> implements Serializable
 
     @Override
     public final void buscar() {
-        mudarParaBusca();
         try {
             this.entidades = getDao().buscar();
             if (entidades == null || entidades.size() < 1) {

@@ -5,6 +5,13 @@ import java.util.Objects;
 
 public class Usuario implements Serializable {
 
+    public Usuario() {
+        this.id = 0;
+        this.nome = "";
+        this.login = "";
+        this.senha = "";
+    }
+    
     private Integer id;
     private String nome, login, senha;
     

@@ -6,24 +6,135 @@
              template="template.xhtml"
              xmlns:p="http://primefaces.org/ui"
              xmlns:sc="http://xmlns.jcp.org/jsf/composite/sccomp"
-             xmlns:f="http://xmlns.jcp.org/jsf/core">
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <style>
+        .formPrincipal {
+            /*min-height: 1400px;*/
+        }
+
+        .panelLogin {
+            width: 20%;
+            background: #f4f4f4;
+        }
+
+        .formTable {
+            float: left;
+            margin-right: 3%;
+            width: 70%;
+            background: #f4f4f4;
+
+        }
+
+        .formLogin {
+            width: 100%;
+        }
+
+        .formLoginInput {
+            width: 97%;
+        }
+
+        #search-panel {
+            display: inline-block;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .input-search {
+            width:75%;
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 1.5%; 
+            padding: 5px;
+            border-radius: 3px;
+            box-shadow: inset 0 1px 1px #8f8f8f;
+        }
+        .item-lista {
+            list-style: none;
+        }
+        .item-lista > li {
+            margin-top: 2%;
+        }
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .375rem 2rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+
+        .btn-login {
+            float: right;
+            margin-top: 3%;
+            color: #212529;
+            background-color: #f8f9fa;
+            border-color: #9c9c9c;
+            cursor: pointer;
+        }
+
+        .btn-login:hover {
+            color: #212529;
+            background-color: #e2e2e2;
+            border-color: #d3d9df;
+        }
+        
+        .table {
+            padding: 0px!important;
+        }
+
+    </style>
 
     <h1>Bem vindo</h1>
-    <h:form>
+    <h:form >
         <p:messages autoUpdate="true" showDetail="true"></p:messages>
-        <p:fieldset legend="Login">
-            <!--<sc:toolbarLogin crudBean="#{usuarioBean}"></sc:toolbarLogin>-->
-            <!--and usuarioBean.autentica == false-->
-            <p:panelGrid columns="2" rendered="true">
-                <h:outputLabel value="Login"></h:outputLabel>
-                <p:inputText value="#{LoginBean.login}"></p:inputText>
-                <h:outputLabel value="Senha"></h:outputLabel>
-                <p:password value="#{LoginBean.password}"></p:password>
-                <h:commandButton action="#{LoginBean.validateUsernamePassword}"
-			value="Login"></h:commandButton>
-            </p:panelGrid>
-
+        <p:fieldset legend="Todos os Carros" class="formTable">
+            <div id="search-panel">
+                <h:inputText autocomplete="off" value="#{SearchBean.display}" class="input-search">
+                    <f:passThroughAttribute name="placeHolder" value="Digite um modelo ou dono"/>
+                    <f:ajax event="keyup" listener="#{SearchBean.search()}" execute="@this" render="result-panel"/>
+                </h:inputText>
+                <p:panelGrid rendered="true" columns="1" layout="grid">
+                    <h:panelGroup id="result-panel">
+                        <p:dataTable value="#{SearchBean.result}" var="carro" emptyMessage="Experimente pesquisar algo!">
+                            <p:column  styleClass="label" headerText="Nome Dono">
+                                <h:outputLabel value="#{carro.nomeDono}"></h:outputLabel>
+                            </p:column>
+                            <p:column  styleClass="label" headerText="Modelo">
+                                <h:outputLabel value="#{carro.modelo}"></h:outputLabel>
+                            </p:column>
+                            <p:column  styleClass="label" headerText="Cor">
+                                <h:outputLabel value="#{carro.cor}"></h:outputLabel>
+                            </p:column>
+                            <p:column  styleClass="label" headerText="Ano">
+                                <h:outputLabel value="#{carro.apenasAno}"></h:outputLabel>
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGroup>    
+                </p:panelGrid>
+            </div>
         </p:fieldset>
+        <p:fieldset legend="Login" class="panelLogin">
+            <p:panelGrid columns="2" rendered="true" class="formLogin">
+                <h:outputLabel value="Email"></h:outputLabel>
+                <p:inputText class="formLoginInput" value="#{LoginBean.login}"></p:inputText>
+                <h:outputLabel value="Senha"></h:outputLabel>
+                <p:password class="formLoginInput" value="#{LoginBean.password}"></p:password>
+            </p:panelGrid>
+            <h:commandButton action="#{LoginBean.validateUsernamePassword}" value="Entrar" class="btn btn-login"></h:commandButton>
+        </p:fieldset>
+
+
+
     </h:form>
 
 </ui:decorate>

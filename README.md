@@ -1,12 +1,6 @@
 # SistemasCarros
 Sistema de Troca de Carros 
 
-- Certifique-se de ter o MySQL instalado e configurado.
-- Em `src/java/Conexao` altere o arquivo `FabricaConexao.java` com suas credenciais do MySQL.
-- Use os seguintes comandos para configurar o ambiente da base de dados:
-
-CREATE SCHEMA `SistemaCarros`;
-
 CREATE TABLE `Carros` (
   `IdDono` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,

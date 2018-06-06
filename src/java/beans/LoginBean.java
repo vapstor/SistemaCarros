@@ -1,7 +1,7 @@
 package beans;
 
 /**
- * Managed Bean for Login
+ * Bean Para Login
  *
  */
 import java.io.Serializable;

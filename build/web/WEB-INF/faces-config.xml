@@ -13,48 +13,54 @@
         <description>Troca Bean</description>
         <managed-bean-name>TrocaBean</managed-bean-name>
         <managed-bean-class>beans.TrocaBean</managed-bean-class>
-    
-        <managed-bean-scope>session</managed-bean-scope></managed-bean>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <description>Search Bean</description>
+        <managed-bean-name>SearchBean</managed-bean-name>
+        <managed-bean-class>beans.SearchBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
     <navigation-rule>
         <description>Navigation from the hello page.</description>
         <from-view-id>/index.xhtml</from-view-id>
-<!--        <navigation-case>
+        <!--        <navigation-case>
             <from-outcome>false</from-outcome>
             <to-view-id>/gerenciar-carro.xhtml</to-view-id>
             <redirect/>
         </navigation-case>-->
         
-	<navigation-rule>
-		<from-view-id>/index.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>admin</from-outcome>
-			<to-view-id>/gerenciar-carro.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
+        <navigation-rule>
+            <from-view-id>/index.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>admin</from-outcome>
+                <to-view-id>/gerenciar-carro.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
         
         <navigation-rule>
-		<from-view-id>/gerenciar-carro.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>index</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
+            <from-view-id>/gerenciar-carro.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>index</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
         
         <navigation-rule>
-		<from-view-id>/gerenciar-usuario.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>index</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
+            <from-view-id>/gerenciar-usuario.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>index</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
         
         <navigation-rule>
-		<from-view-id>/index.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>index</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
+            <from-view-id>/index.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>index</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
         
     </navigation-rule>
     

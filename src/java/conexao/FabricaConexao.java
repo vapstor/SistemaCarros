@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Danilo Souza Almeida
+ * @author vapstor
  */
 public class FabricaConexao {
     
